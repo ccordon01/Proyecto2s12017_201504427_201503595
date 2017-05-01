@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="appandroid.estructuras.paola.mydrive.Principal">
+
+    <LinearLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:weightSum="1"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="349dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/Iniciar"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="31dp"
+            tools:layout_editor_absoluteY="-4dp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="349dp"
+            android:layout_height="193dp"
+            app:srcCompat="@drawable/login_image" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"
+            android:text="@string/Name" />
+
+        <EditText
+            android:id="@+id/UserBox"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"
+            android:text="@string/password_text" />
+
+        <EditText
+            android:id="@+id/boxPassword"
+            android:layout_width="351dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/LoginBut"
+            android:layout_width="349dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Iniciar" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Drive</string>
+    <string name="Name">Usuario</string>
+    <string name="Iniciar">Iniciar Sesion</string>
+    <string name="password_text">Contraseña</string>
+    <string name="sign_up">Registrate</string>
+
+
+</resources>

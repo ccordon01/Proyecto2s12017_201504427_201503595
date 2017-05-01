@@ -1,0 +1,19 @@
+<!DOCTYPE html></ html>
+<html>
+<head>
+	<title>Prueba</title>
+</head>
+<body>
+
+
+<form id='pdf' action="/app/vista_que_procesa/"
+method="POST">
+{% csrf_token %}
+<input type="hidden" name="curso" value="{{id_curso}}"/>
+<input type="hidden" name="persona"
+value="{{id_persona}}"/>
+<button id='pdf' type="submit" value="Exportar"
+alt='consulta'></button>
+
+</body>
+</html>

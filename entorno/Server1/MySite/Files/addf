@@ -1,0 +1,54 @@
+
+Eliminar(clave)
+ si la pagina principal esta vacia:
+ 	el arbol esta vacio, y no hace nada
+ de lo contrario
+ 	Se Eliminara(de la principal, clave)
+
+Eliminara(raiz,clave)
+	intentar
+		eliminarRegistro(raiz, clave)
+	si no se puede
+		SE QUEDO EN LA EXCEPTION DE ELIMNIARA
+		Esta = La clave no esta
+	finalmente
+		si la clave no esta
+			imprimir, NO SE ENCONTRO ELEMENTO
+		en cambio si esta
+			Si la raiz.cuentas es 0
+				La raiz = su primera rama
+			La pagina principal ahora es la raiz
+			imprimir SE ELIMINO LA CLAVE
+
+EliminarRegistro(raiz, clave):
+	pos = 0
+	si la raiz esta vacia
+		esta = no tiene raiz
+	en cambio si tiene algo
+		posicion = la posicion del nodo en la pagina actual
+		si Esta
+			si la rama en esa posicion de la raiz esta vacia
+				print SE ELIMINARA DE UNA HOJA
+				mandar ALV(raiz, posicion)
+
+			si tiene ramas
+				Encontrar el sucesor de (raiz, en posicion)
+				Eliminar registro(raiz.Ramas[pos], la clave de la raiz, en la posicion -)
+
+		si no esta
+			intentara eliminar registro en la rama en la pos, con la rclave actual
+			si(la raiz en la pos no es none yyy las claves la rama anterior son menores a 2)
+				reestablecer la raiz en la posicion
+
+
+Encontrar sucecsor(raiz, numero)
+	q = rama de la raiz en la posicion numero
+
+	mientras la pagina no sea vacia en q.ramas[0]
+		q = q.ramas en la posicon 0
+	la clave [numero-1] de la raiz = clave 0 de q
+
+
+Combina(raiz, pos)
+	MoverDer = ramasp[pos]
+	MovIz = raiz.Ramas[pos - 1]
