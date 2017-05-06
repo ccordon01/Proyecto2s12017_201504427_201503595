@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:weightSum="1"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="16dp">
 
         <TextView
             android:id="@+id/textView"
@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/Iniciar"
+            android:textColor="@android:color/background_light"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="31dp"
             tools:layout_editor_absoluteY="-4dp" />
@@ -29,14 +30,16 @@
             android:id="@+id/imageView"
             android:layout_width="349dp"
             android:layout_height="193dp"
-            app:srcCompat="@drawable/login_image" />
+            app:srcCompat="@drawable/login" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.07"
-            android:text="@string/Name" />
+            android:text="@string/Name"
+            android:textColor="@color/DriveTextoPrimario"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/UserBox"
@@ -50,7 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.07"
-            android:text="@string/password_text" />
+            android:text="@string/password_text"
+            android:textColor="@color/DriveTextoPrimario"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/boxPassword"
@@ -63,7 +68,17 @@
             android:id="@+id/LoginBut"
             android:layout_width="349dp"
             android:layout_height="wrap_content"
-            android:text="@string/Iniciar" />
+            android:layout_weight="0.18"
+            android:background="@color/ColorAccentDrive"
+            android:text="@string/Iniciar"
+            android:textColor="@android:color/background_light"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/mensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/background_light" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

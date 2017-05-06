@@ -10,7 +10,17 @@
 
     <style name="DriveTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="android:colorForeground">@color/foreground_material_light</item>
-        <item name="android:textColorPrimary">@color/primary_text_materi</item>
+        <item name="android:textColorPrimary">@color/DriveTextoPrimario</item>
+        <item name="android:colorBackground">@color/DriveBackground</item>
+        <item name="colorPrimary">@color/ColorPrimarioDrive</item>
+        <item name="colorAccent">@color/ColorAccentDrive</item>
+    </style>
+
+    <style name="DriveThemeToolBar" parent="AppTheme" >
+        <item name="colorPrimary">@color/ColorPrimarioDrive</item>
+        <item name="android:colorBackground">@color/DriveBackground</item>
+        <item name="colorAccent">@color/ColorAccentDrive</item>
+        <item name="android:textColorPrimary">@color/DriveTextoPrimario</item>
     </style>
 
 </resources>
