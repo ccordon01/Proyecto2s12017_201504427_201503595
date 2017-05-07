@@ -1,5 +1,6 @@
 from Pagina import Nodo
 from Acciones import Acciones
+from ArbolB import Arbol
 
 
 class ListaSimple(object):
@@ -18,10 +19,21 @@ class ListaSimple(object):
 		else:
 			return False
 
- 	def insertar(self,user,password):
- 		nuevo = NodoU(user,password)
+ 	def insertar(self,nuevo):
+ 		self.esta = False
+ 		self.insertarYa(nuevo)
+
+
+	def nuevoNodo(self,user,password):
+		nuevo = NodoU(user,password)
  		nuevo.root = Nodo("root")
- 		if self.primero == None:
+ 		nuevo.root._carpetas =Arbol()
+ 		return nuevo
+
+ 		
+
+	def insertarYa(self,nuevo):
+		if self.primero == None:
  			self.primero = nuevo
  			self.ultimo = self.primero
  			self.con = self.con+1
@@ -29,7 +41,7 @@ class ListaSimple(object):
 			
 
  		else:
- 			self.buscar(user)
+ 			self.buscar(nuevo.user)
  			if not self.esta:
 	 			self.ultimo.siguiente = nuevo
 	 			self.ultimo = self.ultimo.siguiente
@@ -38,6 +50,7 @@ class ListaSimple(object):
 	 			return " se inserto "+str(self.ultimo.user)
  			else:
  				return " USUARIO EXISTENTE, NO SE CREO"
+
 
 
 
@@ -93,7 +106,7 @@ class ListaSimple(object):
 				if aux.user == palabra:
 					print 'Se encontro'
 					self.esta = True
-					print "Se encontro "+str(palabra)+ " en el indice ",str(cont)
+					print "Se encontro "+str(aux.user)+ " en el indice ",str(cont)
 					return aux
 					break
 				else:
@@ -111,7 +124,9 @@ class NodoU(object):
 		self.password = password
 		self.siguiente = None
 		self.anterior = None
+		self.Notificaciones = None
 		self.root = Nodo("root")
+		self.root._carpetas = Arbol()
 
 	def getUser(self):
 		return str(self.user)

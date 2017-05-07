@@ -24,9 +24,10 @@
 
       <div class="tab-content">
         <div id="signup">
-          <h1>Sign Up for Free</h1>
+          <h1>Registrate!</h1>
 
-          <form action="holi" method="post">
+          <form action="/accounts/verify/" method="POST">
+          {% csrf_token %}
 
          <!-- <div class="top-row">
             <div class="field-wrap">
@@ -48,7 +49,7 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="ema" id = "user" required autocomplete="off"/>
+            <input type="ema" id = "user" name="user" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">

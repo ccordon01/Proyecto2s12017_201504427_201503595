@@ -7,11 +7,11 @@ p = probando()
 class Prueba ():
 
 	'''
-	cd documents\estructura de datos\laboratorio\proyecto2\entorno\server1
-	python manage.py runserver
+	cd documents\edd\laboratorio\proyecto2\entorno\server1
+	python manage.py runserver 0.0.0.0:8000
 
 
-	cd documents\estructura de datos\laboratorio\proyecto2\entorno\server1\mysite\files
+	cd documents\edd\laboratorio\proyecto2\entorno\server1\mysite\files
 	python prueba.py
 	'''
 
@@ -23,7 +23,7 @@ class Prueba ():
 
 	def inicial():
 		inn = ListaSimple( )
-		inn.insertar('holi','pass123')
+		inn.insertar(inn.nuevoNodo('holi','pass123'))
 		print 'hola'
 
 	def eliminar():
@@ -78,36 +78,32 @@ class Prueba ():
 
 
 
-		a.InsertarNuevo(a.nuevo("c1"))
-		a.InsertarNuevo(a.nuevo("c2"))
-		a.InsertarNuevo(a.nuevo("c3"))
-		a.InsertarNuevo(a.nuevo("c4"))
-		a.InsertarNuevo(a.nuevo("c5"))
+		a.InsertarNuevo(a.nuevo("05"))
+		a.InsertarNuevo(a.nuevo("20"))
+		a.InsertarNuevo(a.nuevo("40"))
+		a.InsertarNuevo(a.nuevo("10"))
+		a.InsertarNuevo(a.nuevo("30"))
 		#a.Imprime(a._principal)
 
-		a.InsertarNuevo(a.nuevo("c6"))
-		a.InsertarNuevo(a.nuevo("c7"))
-		a.InsertarNuevo(a.nuevo("c8"))
+		a.InsertarNuevo(a.nuevo("15"))
+		a.InsertarNuevo(a.nuevo("36"))
+		a.InsertarNuevo(a.nuevo("07"))
 		#a.Imprime(a._principal)
-		a.InsertarNuevo(a.nuevo("c9"))
+		a.InsertarNuevo(a.nuevo("26"))
 
-		a.InsertarNuevo(a.nuevo("c10"))
-		a.InsertarNuevo(a.nuevo("c11"))
-		a.InsertarNuevo(a.nuevo("c12"))
-		a.InsertarNuevo(a.nuevo("c13"))
-		a.InsertarNuevo(a.nuevo("c14"))
-		a.InsertarNuevo(a.nuevo("c15"))
-		a.InsertarNuevo(a.nuevo("c16"))
-		a.InsertarNuevo(a.nuevo("c17"))
-		a.InsertarNuevo(a.nuevo("c18"))
-		a.InsertarNuevo(a.nuevo("c19"))
-		a.InsertarNuevo(a.nuevo("c7"))
-		a.InsertarNuevo(a.nuevo("c111"))
-		a.InsertarNuevo(a.nuevo("c112"))
-		a.InsertarNuevo(a.nuevo("c113"))
-		a.InsertarNuevo(a.nuevo("c114"))
-		a.InsertarNuevo(a.nuevo("c115"))
-
+		a.InsertarNuevo(a.nuevo("18"))
+		a.InsertarNuevo(a.nuevo("22"))
+		a.InsertarNuevo(a.nuevo("05"))
+		a.InsertarNuevo(a.nuevo("42"))
+		a.InsertarNuevo(a.nuevo("13"))
+		a.InsertarNuevo(a.nuevo("46"))
+		a.InsertarNuevo(a.nuevo("27"))
+		a.InsertarNuevo(a.nuevo("08"))
+		a.InsertarNuevo(a.nuevo("32"))
+		a.InsertarNuevo(a.nuevo("38"))
+		a.InsertarNuevo(a.nuevo("24"))
+		a.InsertarNuevo(a.nuevo("45"))
+		a.InsertarNuevo(a.nuevo("25"))
 
 
 
@@ -134,13 +130,13 @@ class Prueba ():
 
 		print ' \n ====================eliminacion :v================= \n'
 		#eliminar()
-		#a.Eliminar(a.nuevo("c2"))
+		a.Eliminar(a.nuevo("10"))
 		#a.Imprime(a._principal)
 		#a.Eliminar(a.nuevo("c3"))
 		#a.Imprime(a._principal)
 
 
-		a.InsertarNuevo(a.nuevo("a1"))
+		'''a.InsertarNuevo(a.nuevo("a1"))
 		a.InsertarNuevo(a.nuevo("a2"))
 		a.InsertarNuevo(a.nuevo("a3"))
 		a.InsertarNuevo(a.nuevo("a4"))
@@ -150,14 +146,16 @@ class Prueba ():
 		a.InsertarNuevo(a.nuevo("j2"))
 		a.InsertarNuevo(a.nuevo("j3"))
 		a.InsertarNuevo(a.nuevo("j4"))
-		a.InsertarNuevo(a.nuevo("j5"))
+		a.InsertarNuevo(a.nuevo("j5"))'''
 		print '==================finally========================='
 		print '=================================================='
-		a.Imprime(a._principal)
-		a.GenerarStruc(a._principal)
-		print a._archivo
-		#a.Eliminar(a.nuevo("c9"))
 		#a.Imprime(a._principal)
+		a.Imagen(a._principal)
+		a.NodoBus(a.nuevo("j5"),a._principal)
+		a.ListaCarpetas()
+		print a._np
+		#a.Eliminar(a.nuevo("c9"))
+		a.Imprime(a._principal)
 
 
 

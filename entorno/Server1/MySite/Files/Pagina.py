@@ -25,8 +25,8 @@ class Pagina(object):
 class Nodo(object):
 
 	def __init__(self,id):
-		self._Carpetas = None
-		self._Archivos = None
+		self._carpetas = None
+		self._archivos = None
 		self.Id = id
 
 	def addCarpeta(self):

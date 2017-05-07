@@ -19,6 +19,7 @@ Esta = False
 Mov = None
 NRaiz = None'''
 
+
 class Arbol (object):
 
 
@@ -36,6 +37,7 @@ class Arbol (object):
 		self._total = 0
 		self._esperaos = 2
 		self._com = 1
+		self._np =""
 		self._archivo = "digraph structs { \n node[shape=record] \n"
 		self._aux = deque
 		self._principal = None
@@ -48,45 +50,12 @@ class Arbol (object):
 		self._EmpujarArriba = False
 		self._Esta = False
 
+		
 
 
 
-	def Imprime(self,raiz):
-		self._com = 1
-		self.ImprimeYa(raiz)
 
-
-
-	def ImprimeYa(self,raiz):
-
-		'''self._hijos.append("RAIZ")
-		print str(self._hijos.popleft())'''
-
-		print str(raiz.Cuentas) + " = numero de claves que posee y la raiz inicia con " + raiz.Claves[0].Id
-		if raiz.Cuentas >0:
-			for i in range(5):
-				#print str(i) + str(raiz.Cuentas)
-				if i>raiz.Cuentas-1 or raiz.Claves[i]== None :
-					for k in range(i,5):
-						raiz.Claves[k]==None
-						k = k+1
-					break
-				else:
-					print str(self._com) +". "+ raiz.Claves[i].Id
-					self._com +=1
-
-
-			'''for i in range(raiz.Cuentas):
-				print str(self._com) +". "+ raiz.Claves[i].Id
-				self._com +=1'''
-
-			for n in range(raiz.Cuentas+1):
-
-				if(raiz.Ramas[n]!= None):
-					print ''
-					print 'hijo '+str(n) +' del raiz que empieza con ' + str(raiz.Claves[0].Id)
-
-					self.ImprimeYa(raiz.Ramas[n])
+	
 
 
 
@@ -135,9 +104,9 @@ class Arbol (object):
 
 		j = 0
 
-		if min(clave.Id.lower(),raiz.Claves[0].Id.lower()) == clave.Id.lower(): #es porque no hay que correrlo, es un |2| y la raiz es por ejemplo  8|25|33
+		if min(clave.Id.lower(),raiz.Claves[0].Id.lower().strip()) == clave.Id.lower(): #es porque no hay que correrlo, es un |2| y la raiz es por ejemplo  8|25|33
 
-			if(clave.Id.lower()==raiz.Claves[0].Id):
+			if(clave.Id.lower()==raiz.Claves[0].Id.lower().strip()):
 				print 'CLAVE REPETIDA EN LA PRIMERA POSICION DE LA RAIZ ACTUAL'
 				self._Esta= True
 
@@ -153,9 +122,9 @@ class Arbol (object):
 			print ''
 			j = raiz.Cuentas #el numero actual de nodos llenos\
 			print 'esta raiz tiene ' + str(j) + ' claves'
-			while min(clave.Id.lower(),raiz.Claves[j-1].Id.lower()) == clave.Id.lower() and j > 1: #mientras el nuevo nodo sea menor que el de la clave de la raiz -1 y j sea mayor a 1
+			while min(clave.Id.lower(),raiz.Claves[j-1].Id.lower().strip()) == clave.Id.lower() and j > 1: #mientras el nuevo nodo sea menor que el de la clave de la raiz -1 y j sea mayor a 1
 				j = j - 1
-				if(clave.Id.lower() ==raiz.Claves[j].Id.lower()):
+				if(clave.Id.lower() ==raiz.Claves[j].Id.lower().strip()):
 					self._Esta = True
 					return j
 				print clave.Id +" kk no es igual "+ raiz.Claves[j].Id
@@ -227,7 +196,9 @@ class Arbol (object):
 		print ''
 		print 'SE CREARA UNA NUEVA CARPETA'
 		print '-------------------------------'
-		self.InsertarYa(nuevo, self._principal)
+		inserto = nuevo
+		inserto._Carpetas = Arbol()
+		self.InsertarYa(inserto, self._principal)
 		print str(self._principal.Cuentas)
 		#print principal.Cuentas
 
@@ -343,12 +314,33 @@ class Arbol (object):
 		q = raiz.Ramas[k]
 		while not self.pagVacia(q.Ramas[0]):#mientras la rama de la pagina actual no sea vacia
 			q = q.Ramas[0]
-		raiz.Claves[k - 1] = q.Claves[0]
+		raiz.Claves[k] = q.Claves[1]
 
 
 
 	def Combina(self, raiz, pos):
-		MovDer = raiz.Ramas[pos]
+		q = raiz.Ramas[pos]
+		nIz = raiz.Ramas[pos-1]
+		nIz.Cuentas +=1
+		nIz.Claves[nIz.Cuentas] = raiz.Claves[pos]
+		nIz.Claves[nIz.Cuentas]= q.Ramas[0]
+		j=1
+		while j<=q.Cuentas:
+			nIz.Cuentas+=1
+			nIz.Claves[nIz.Cuentas] = q.Claves[j]
+			nIz.Ramas[nIz.Cuentas] =q.Ramas[j]
+			j +=1
+
+		j=pos
+		while j<= raiz.Cuentas-1:
+			raiz.Claves[j]=raiz.Claves[j+1]
+			raiz.Ramas[j]= raiz.Ramas[j+1]
+			j+=1
+		raiz.Cuentas -=1
+
+
+
+		'''MovDer = raiz.Ramas[pos]
 		MovIz = raiz.Ramas[pos - 1]
 		MovIz.Cuentas += 1
 		MovIz.Claves[MovIz.Cuentas - 1] = raiz.Claves[pos - 1]
@@ -359,11 +351,27 @@ class Arbol (object):
 			MovIz.Claves[MovIz.Cuentas - 1] = MovDer.Claves[j - 1]
 			MovIz.Ramas[MovIz.Cuentas] = MovDer.Ramas[j]
 			j += 1
-		self.ALV(raiz, pos)
+		self.ALV(raiz, pos)'''
 
 
 	def MoverDer(self, raiz, pos):
-		i = raiz.Ramas[pos].Cuentas
+
+		problema = raiz.Rama[pos]
+		nIz = raiz.Ramas[pos-1]
+		j = problema.Cuentas
+
+		while j >= 1:
+			problema.Claves[j+1]= problema.Claves[j]
+			problema.Ramas[j+1]= problema.Ramas[j]
+			j-=1
+		problema.Cuentas +=1
+		problema.Ramas[1] = problema.Ramas[0]
+		problema.Claves[1]= raiz.Claves[pos]
+		raiz.Claves[pos] = nIz.Claves[nIz.Cuentas]
+		problema.Ramas[0] = nIz.Ramas[Nodo.Cuentas]
+		nIz.Cuentas -=1
+
+		'''i = raiz.Ramas[pos].Cuentas
 		while i != 0:
 			raiz.Ramas[pos].Claves[i] = raiz.Ramas[pos].Claves[i - 1]
 			raiz.Ramas[pos].Ramas[i + 1] = raiz.Ramas[pos].Ramas[i]
@@ -373,10 +381,26 @@ class Arbol (object):
 		raiz.Ramas[pos].Claves[0] = raiz.Claves[pos - 1]
 		raiz.Claves[pos - 1] = raiz.Ramas[pos - 1].Claves[raiz.Ramas[pos - 1].Cuentas - 1]
 		raiz.Ramas[pos].Ramas[0] = raiz.Ramas[pos - 1].Ramas[raiz.Ramas[pos - 1].Cuentas]
-		raiz.Ramas[pos - 1].Cuentas -= 1
+		raiz.Ramas[pos - 1].Cuentas -= 1'''
 
 	def MoverIzq(self, raiz, pos):
-		raiz.Ramas[pos - 1].Cuentas += 1
+		problema = raiz.Rama[pos-1]
+		nDer = raiz.Ramas[pos]
+
+		problema.Cuentas +=1
+		problema.Claves[problema.Cuentas]= raiz.Claves[pos]
+		problema.Ramas [problema.Cuentas] = nDer.Ramas[0]
+
+		raiz.Claves[pos]= nDer.Claves[1]
+		nDer.Ramas[1]=nDer.Ramas[0]
+		nDer.Cuentas -=1
+		j = 1
+		while j<= nDer.Cuentas:
+			nDer.Claves[j] = nDer.Claves[j+1]
+			nDer.Ramas[j]=nDer.Ramas[j+1]
+			j+=1
+
+		'''raiz.Ramas[pos - 1].Cuentas += 1
 		raiz.Ramas[pos - 1].Claves[raiz.Ramas[pos - 1].Cuentas - 1] = raiz.Claves[pos - 1]
 		raiz.Ramas[pos - 1].Ramas[raiz.Ramas[pos - 1].Cuentas] = raiz.Ramas[pos].Ramas[0]
 		raiz.Claves[pos - 1] = raiz.Ramas[pos].Claves[0]
@@ -386,14 +410,14 @@ class Arbol (object):
 		while i != raiz.Ramas[pos].Cuentas + 1:
 			raiz.Ramas[pos].Claves[i - 1] = raiz.Ramas[pos].Claves[i]
 			raiz.Ramas[pos].Ramas[i] = raiz.Ramas[pos].Ramas[i + 1]
-			i += 1
+			i += 1'''
 
 	def ALV(self, raiz, pos): # O sea quitar XD
 		print '\n ha entrado a ALV'
 		print 'se va a eliminar el indice ' + str(pos) +'en la raiz actual que empieza con '+raiz.Claves[0].Id
-		j = pos + 2
-		while j != raiz.Cuentas + 1:
-			raiz.Claves[j - 2] = raiz.Claves[j - 1]
+		j = pos + 1
+		while j <= raiz.Cuentas:
+			raiz.Claves[j - 1] = raiz.Claves[j]
 			raiz.Ramas[j - 1] = raiz.Ramas[j]
 			j =j+ 1
 		raiz.Cuentas -= 1
@@ -404,10 +428,12 @@ class Arbol (object):
 				self.MoverDer(raiz, pos)
 			else:
 				self.Combina(raiz, pos)
-		elif raiz.Ramas[1].Cuentas > 2:
-			self.MoverIzq(raiz, 1)
+
 		else:
-			self.Combina(raiz, 1)
+			if raiz.Ramas[1].Cuentas > 2:
+				self.MoverIzq(raiz, 1)
+			else:
+				self.Combina(raiz, 1)
 
 
 	def Imagen(self, raiz):
@@ -425,11 +451,12 @@ class Arbol (object):
 
 		self.GenerarRel(self._principal)
 		self._archivo = self._archivo + "}"
-		self.GenerarImagen()
+		#self.GenerarImagen()
 		print self._archivo
 
 	def GenerarStruc(self,raiz):
 		if not self.pagVacia(raiz):
+			print raiz.Claves[0].Id +" esta rama tiene tantas cuentas : " + str(raiz.Cuentas)
 			self._archivo = self._archivo + "\n node" + str(self._struc) + "[label = \""
 			self._struc = self._struc+1
 
@@ -443,7 +470,7 @@ class Arbol (object):
 			self._archivo = self._archivo + " \"]; "
 			
 
-			for j in range(raiz.Cuentas):
+			for j in range(raiz.Cuentas+1):
 				self.GenerarStruc(raiz.Ramas[j])
 		else:
 			print 'pag v'
@@ -454,6 +481,64 @@ class Arbol (object):
 
  	def GenerarImagen(self):
  		print 'generar'
+
+
+
+ 	def Imprime(self,raiz):
+		self._com = 1
+		self.ImprimeYa(raiz)
+
+
+
+	def ImprimeYa(self,raiz):
+
+		'''self._hijos.append("RAIZ")
+		print str(self._hijos.popleft())'''
+
+		print str(raiz.Cuentas) + " = numero de claves que posee y la raiz inicia con " + raiz.Claves[0].Id
+		if raiz.Cuentas >0:
+			for i in range(5):
+				#print str(i) + str(raiz.Cuentas)
+				if i>raiz.Cuentas-1 or raiz.Claves[i]== None :
+					for k in range(i,5):
+						raiz.Claves[k]==None
+						k = k+1
+					break
+				else:
+					print str(self._com) +". "+ raiz.Claves[i].Id
+					self._com +=1
+
+
+			'''for i in range(raiz.Cuentas):
+				print str(self._com) +". "+ raiz.Claves[i].Id
+				self._com +=1'''
+
+			for n in range(raiz.Cuentas+1):
+
+				if(raiz.Ramas[n]!= None):
+					print ''
+					print 'hijo '+str(n) +' del raiz que empieza con ' + str(raiz.Claves[0].Id)
+
+					self.ImprimeYa(raiz.Ramas[n])
+
+	def ListaCarpetas(self):
+		if self.pagVacia(self._principal):
+			self._np = "vacio"
+		else:
+			self.Lista(self._principal)
+
+
+	def Lista(self,raiz):
+		if not self.pagVacia(raiz):
+			for i in xrange(raiz.Cuentas+1):
+				if(raiz.Ramas[0]!= None):
+					self.Lista(raiz.Ramas[i])
+				if i<raiz.Cuentas:
+					self._np = self._np+raiz.Claves[i].Id + "|"	
+
+			
+
+			
                     
 
 
