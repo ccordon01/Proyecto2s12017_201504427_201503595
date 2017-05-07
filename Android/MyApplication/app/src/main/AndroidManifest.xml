@@ -31,6 +31,7 @@
         <activity android:name=".Carpetas"
             android:theme="@style/DriveThemeToolBar"></activity>
         <activity android:name=".Register"></activity>
+
     </application>
 
 </manifest>

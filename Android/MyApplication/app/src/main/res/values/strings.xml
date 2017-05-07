@@ -4,6 +4,7 @@
     <string name="Iniciar">Iniciar Sesion</string>
     <string name="password_text">Contraseña</string>
     <string name="sign_up">Registrate</string>
+    <string name="carpetas">Carpetas</string>
 
 
 </resources>
