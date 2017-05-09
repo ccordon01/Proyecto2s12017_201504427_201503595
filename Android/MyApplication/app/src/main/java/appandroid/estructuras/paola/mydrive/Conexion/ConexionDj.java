@@ -56,13 +56,36 @@ public class ConexionDj {
 
     }
 
+
+    public String Crear(String actual, String name){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("name",name)
+                .build();
+        String r = GetString(actual + "/createFolder/", formBody);//Acutal viene desde root/algo/algomas/metodo
+        return r;
+    }
+
+
+    public Boolean BuscarCarpeta(String Name,String actual){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("folder",Name)
+                .build();
+        String r = GetString(actual+"/buscarCarpeta", formBody);
+        System.out.println(actual + "/buscarCarpeta");
+        if(r.equalsIgnoreCase("false")){
+            return  true;
+        }
+        return false;
+    }
+
     public static String GetString(String metodo, RequestBody formBody) {
 
         try {
+            //URL url = new URL("http://127.0.0.1:8000/accounts/"+metodo);
             URL url = new URL("http://192.168.1.5:8000/accounts/"+metodo);
             Request request = new Request.Builder().url(url).post(formBody).build();
             Response response = webClient.newCall(request).execute();//Aqui obtiene la respuesta en dado caso si hayas pues un return en python
-            System.out.println("Despues de response");
+            System.out.println("Despues  de response");
             String response_string = response.body().string();//y este seria el string de las respuest
             return response_string;
         } catch (MalformedURLException ex) {

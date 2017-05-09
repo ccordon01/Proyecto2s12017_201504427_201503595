@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import appandroid.estructuras.paola.mydrive.Conexion.ConexionDj;
+
 public class Usuario extends AppCompatActivity {
 
     private TextView mTextMessage;
+    ConexionDj n = new ConexionDj();
+    String cActuales = "CC";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -17,8 +21,18 @@ public class Usuario extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    mTextMessage.setText("");
+                    System.out.println(cActuales);;
+                    if(cActuales!= "CC"||cActuales!= "vacio"){
+                        String lista []= cActuales.split("#");
+                        System.out.println(lista.length);
+                        for (int i = 0; i < lista.length; i++) {
+                            mTextMessage.setText("-"+mTextMessage.getText() + lista[i] +"\n");
+                        }
+                    }else{
+                    mTextMessage.setText("vacip");}
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
@@ -36,6 +50,8 @@ public class Usuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
+
+        cActuales = n.viewSession();
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

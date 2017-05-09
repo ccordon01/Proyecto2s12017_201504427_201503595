@@ -1,11 +1,21 @@
 package appandroid.estructuras.paola.mydrive;
 
+import android.content.DialogInterface;
+import android.graphics.Paint;
+import android.media.Image;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,20 +28,23 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import appandroid.estructuras.paola.mydrive.Conexion.Carpeta;
 import appandroid.estructuras.paola.mydrive.Conexion.ConexionDj;
-import appandroid.estructuras.paola.mydrive.Conexion.Person;
-import rest.devazt.networking.HttpClient;
-import rest.devazt.networking.OnHttpRequestComplete;
-import rest.devazt.networking.Response;
 
-public class Carpetas extends AppCompatActivity implements View.OnClickListener {
+public class Carpetas extends AppCompatActivity implements View.OnClickListener{
 
-    LinearLayout contenido;
-    LinearLayout despl;
-    TextView t,impresion;
-    Button prueba;
+    //LinearLayout contenido;
+    //LinearLayout despl;
+    /*TextView t,impresion;
+    Button prueba;*/
+
+    ImageView imLogout, immodif,imelimina,imatras,imnuevo;
+    EditText nombre;
+    private String m_Text = "";
     ConexionDj n = new ConexionDj();
+    String rutaActual= "root";
     String cActuales = "CC";
 
 
@@ -42,33 +55,46 @@ public class Carpetas extends AppCompatActivity implements View.OnClickListener 
         System.out.println("se ha creado pagina carpetas");
         System.out.println("el texto de carpetas actuales es "+cActuales);
 
+        imLogout = (ImageView)findViewById(R.id.imlogout);
+        immodif = (ImageView)findViewById(R.id.imModif);
+        imelimina = (ImageView)findViewById(R.id.imelimina);
+        imatras = (ImageView)findViewById(R.id.imatras);
+        imnuevo = (ImageView)findViewById(R.id.imnueva);
+        nombre = (EditText)findViewById(R.id.nameFolder);
+
+        imLogout.setOnClickListener(this);
+        imelimina.setOnClickListener(this);
+        imatras.setOnClickListener(this);
+        imnuevo.setOnClickListener(this);
+        immodif.setOnClickListener(this);
 
 
+        String[] listaCarpetas = llenarLista();
+        RecyclerView recycler = (RecyclerView)findViewById(R.id.Lista);
+        LinearLayoutManager llm = new LinearLayoutManager( this);
+        recycler.setLayoutManager(llm);
+        System.out.println("EL PINSHI TAMANO CAA ES "+listaCarpetas.length);
+        if(!listaCarpetas[0].equalsIgnoreCase("vacio")){
+            Adapter adaptador = new Adapter(listaCarpetas);
+            recycler.setAdapter(adaptador);
+        }
 
-        probar();
-        //crear();
     }
 
-    private void probar() {
-        //prueba = (Button)findViewById(R.id.prueba);
-        //impresion = (TextView)findViewById(R.id.impresion);
-        //contenido = (LinearLayout)findViewById(R.id.panels);
-       // t = (TextView)findViewById(R.id.textores);
+    private String [] llenarLista() {
         cActuales = n.viewSession();
-        //despl = (LinearLayout)findViewById(R.id.LinLay);
-
-        //prueba.setOnClickListener(this);
-        TextView  tv = (TextView)findViewById(R.id.TV);
-        tv.setText("Este es un textview");
+        String devuelve[] = cActuales.split("#");
+        return devuelve;
 
 
     }
+
+
     
     private void cargar(){
         if(!cActuales.equalsIgnoreCase("vacio")){
-            String [] folders = cActuales.split("|");
+            String [] folders = cActuales.split("#");
             for (int i = 0; i < folders.length; i++) {
-
             }
         }
 
@@ -77,8 +103,74 @@ public class Carpetas extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        //t.setText(cActuales);
-        //impresion.setText(impresion.getText() + "\n" +n.django("quesito", "jamon"));
+        switch (v.getId()){
+            case R.id.imnueva:
+                System.out.println("se va a buscar "+nombre.getText().toString() + rutaActual);
+                Boolean  fd = n.BuscarCarpeta(nombre.getText().toString(),rutaActual);
+                if (!fd){
+                    n.Crear(rutaActual, nombre.getText().toString());
+                }else{
+
+                    poprem();
+                }
+
+
+
+        }
+
+    }
+
+
+    public void poprem(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Title");
+        builder1.setMessage("my message");
+        builder1.setCancelable(true);
+        builder1.setNeutralButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+
+    public void popup(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("modificacion ");
+
+// Set up the input
+        final EditText input = new EditText(this);
+
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                m_Text = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+
+
+    private void crearcarpeta(String name){
+
 
     }
 
@@ -91,7 +183,7 @@ public class Carpetas extends AppCompatActivity implements View.OnClickListener 
 
 
 
-    private void crear() {
+    /*private void crear() {
 
         System.out.println("SE ha creado esta babosada==============================================");
 
@@ -131,7 +223,7 @@ public class Carpetas extends AppCompatActivity implements View.OnClickListener 
         });
 
         cliente.excecute("https://www.w3schools.com/angular/customers.php");
-    }
+    }*/
 
 }
 

@@ -42,6 +42,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         if(user.getText()!=null){
             if(password.getText()!= null){
                 c.django(user.getText().toString(),password.getText().toString());
+                Intent Iniciar = new Intent(Register.this,Usuario.class);
+                startActivity(Iniciar);
             }else{
                 mensaje.setText("Escriba una Contraseña");
             }

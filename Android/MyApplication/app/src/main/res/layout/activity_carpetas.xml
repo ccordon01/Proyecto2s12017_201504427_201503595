@@ -1,34 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:id = "@+id/Carpetas"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    android:weightSum="1">
-</android.support.v7.widget.RecyclerView>
-<!--<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context="appandroid.estructuras.paola.mydrive.Carpetas">
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/linearLayout"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/TV"
-        android:layout_width="0dp"
-        android:layout_height="9dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>-->
+        <ImageView
+            android:id="@+id/imlogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/logout2" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearLayout"
+        android:id = "@+id/busqueda">
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools = "http://schemas.android.com/tools"
+        android:id = "@+id/Lista"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context = "appandroid.estructuras.paola.mydrive.Carpetas"
+
+        android:layout_below="@+id/busqueda">
+    </android.support.v7.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/imatras"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/volver"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:id="@+id/imelimina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Lista"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/delete"
+        android:layout_alignTop="@+id/imnueva" />
+
+    <ImageView
+        android:id="@+id/imModif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/modificar"
+        android:layout_above="@+id/Lista"
+        android:layout_toLeftOf="@+id/imelimina"
+        android:layout_alignTop="@+id/imelimina" />
+
+    <ImageView
+        android:id="@+id/imnueva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/nueva"
+        android:layout_alignTop="@+id/nameFolder"
+        android:layout_toStartOf="@+id/imModif"
+        android:layout_above="@+id/Lista" />
+
+    <EditText
+        android:id="@+id/nameFolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Lista"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:layout_toRightOf="@+id/busqueda"
+        android:layout_toLeftOf="@+id/imnueva"
+        android:layout_toStartOf="@+id/imnueva" />
+
+</RelativeLayout>
 
