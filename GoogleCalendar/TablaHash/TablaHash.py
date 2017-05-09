@@ -3,7 +3,7 @@ class nodoHash(object):
         super(nodoHash, self).__init__()
         self.dato=None
         self.estado= 0
-
+        
 class nodoEvento(object):
     def __init__(self,nombre,direccion,descripcion,hora):
         self.nombre = nombre
@@ -55,10 +55,11 @@ class adminHash(object):
 
     def insertar(self,nombre,direccion,descripcion,hora):
     	evento = nodoEvento(nombre,direccion,descripcion,hora)
-    	return self.insertarHash(evento,int(self.function(self.calculoString("nombre"))))
+    	return self.insertarHash(evento,int(self.function(self.calculoString(nombre))))
     
     def eliminar(self,nombre):
-    	pos = int(self.function(self.calculoString("nombre")))
+    	pos = int(self.function(self.calculoString(str(nombre))))
+        print nombre
     	while pos<self.tam:
             if int(self.hash[pos].estado)==2:
                 if self.hash[pos].dato.nombre == nombre:
@@ -66,13 +67,23 @@ class adminHash(object):
                      self.hash[pos].estado = 1
                      return "Evento Eliminado"
             pos+=1
-        return "No existe evento"
+        return "No existe evento"    
 
-adminTabla = adminHash(100)
+    def mostrar(self):
+        pos = 0
+        datos = ""
+        while pos<self.tam:
+            if int(self.hash[pos].estado)==2:
+                datos += str(self.hash[pos].dato.nombre) + "," + str(self.hash[pos].dato.hora) + ";"
+            pos+=1
+        return datos
+
+adminTabla = adminHash(101)
 #print len(adminTabla.hash)
 index =adminTabla.insertar("Cumple Papi","Zona 2","Cumple Papi", "8:45")
 print str(index) +" "+adminTabla.hash[index].dato.nombre
 index =adminTabla.insertar("Cumple Papi","Zona 2","Cumple Papi", "8:45")
 print str(index) +" "+adminTabla.hash[index].dato.nombre
+print adminTabla.mostrar()
 print adminTabla.eliminar("Cumple Papi")
 #print "Hola Mundo"
