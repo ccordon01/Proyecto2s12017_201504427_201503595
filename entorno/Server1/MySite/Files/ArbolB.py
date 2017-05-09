@@ -197,7 +197,7 @@ class Arbol (object):
 		print 'SE CREARA UNA NUEVA CARPETA'
 		print '-------------------------------'
 		inserto = nuevo
-		inserto._Carpetas = Arbol()
+		inserto._carpetas = Arbol()
 		self.InsertarYa(inserto, self._principal)
 		print str(self._principal.Cuentas)
 		#print principal.Cuentas
@@ -522,6 +522,7 @@ class Arbol (object):
 					self.ImprimeYa(raiz.Ramas[n])
 
 	def ListaCarpetas(self):
+		self._np = ""
 		if self.pagVacia(self._principal):
 			self._np = "vacio"
 		else:
@@ -534,7 +535,7 @@ class Arbol (object):
 				if(raiz.Ramas[0]!= None):
 					self.Lista(raiz.Ramas[i])
 				if i<raiz.Cuentas:
-					self._np = self._np+raiz.Claves[i].Id + "|"	
+					self._np = self._np+raiz.Claves[i].Id + "#"	
 
 			
 

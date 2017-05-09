@@ -81,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:srcCompat="@drawable/nueva"
-        android:layout_alignTop="@+id/nameFolder"
-        android:layout_toStartOf="@+id/imModif"
-        android:layout_above="@+id/Lista" />
+        android:layout_above="@+id/Lista"
+        android:layout_toLeftOf="@+id/imModif"
+        android:layout_below="@+id/imatras" />
 
     <EditText
         android:id="@+id/nameFolder"

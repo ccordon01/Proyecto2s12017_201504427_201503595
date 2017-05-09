@@ -91,6 +91,11 @@ def prueba(request):
 		nombre = request.POST.get("nom")
 		clave = request.POST.get("nom2")
 		driveUsers.insertar(driveUsers.nuevoNodo(nombre,clave))
+		s.actualUser = driveUsers.buscar(nombre)
+		s.ActualFolder = s.actualUser.root
+		s.ActualFolder._carpetas.InsertarNuevo(a.nuevo("carpeta1"))
+		s.ActualFolder._carpetas.InsertarNuevo(a.nuevo("carpeta2"))
+
 		return HttpResponse("Nooo way back from heell")
 	else:
 		return HttpResponse("This is the real life, this is the fantasy :v")
@@ -225,32 +230,61 @@ def PrintUsers(request):
 def ModifyFoler(request):
 	print 'folder'
 
-def CreateF(request):
+def CreateF(request,offset):
 	if request.method == 'POST':
 		folder = request.POST.get('folder')
 		s.ActualFolder._carpetas.InsertarNuevo(a.nuevo(folder))
+		if s.ActualFolder._carpetas.esta == True:
+			return HttpResponse("Exist")
+		else:
+			return HttpResponse('No')
+	else:
+		return HttpResponse("no es un post")
+
 
 def DeleteF(request):
 	if request.method == 'POST':
 		folder = request.POST.get('folder')
 		s.ActualFolder._carpetas.Eliminar(a.nuevo(folder))
 
+
+def buscaractual(request,offset):
+	if request.method == 'POST':
+		print 'se va a buscar' + request.POST.get('folder')
+		folder = request.POST.get('folder')
+		Node = s.ActualFolder._carpetas.NodoBus(a.nuevo(folder),s.ActualFolder._carpetas._principal)
+		if(Node == None):
+			return HttpResponse('false')
+			print 'Se va a insertar un  nuevo folder'
+		print 'Desea reemplazar?'
+		return HttpResponse('true')
+	else:
+		print 'no existe metodo post'
+		return HttpResponse('no existe')
+
+
+
 def FindFolder(request, offset):
+
+	print '\n\n=================se va a a findfolder'
+	print offset
 	carpetas=offset.split("/")
 	busqueda = RootTree
 	for x in xrange(len(carpetas)):
-		devuelve = buscarfolder(a.nuevo(str(carpetas[x])),busqueda._carpetas._principal)
+		devuelve = a.NodoBus(a.nuevo(str(carpetas[x])),busqueda._carpetas._principal)#devuelve un nodo de arbol, que es la carpeta a aencontrar
 		busqueda = devuelve
 	if(devuelve != None):
+		print 'Se ha encontrado carpeta'
+		print devuelve.Id
 		s.ActualFolder = devuelve
 		print devuelve.Id
-		devolucion = definirCarpetas()
+		s.ActualFolder._carpetas.ListaCarpetas()
+		devolucion = s.ActualFolder._carpetas._np
 		print devolucion
-		return HttpResponse('fa')
-	return HttpResponse('none')
-
-def buscarfolder(clave,raiz):
-	return a.NodoBus(clave,raiz)
+		#devolucion = definirCarpetas()
+		#dprint devolucion
+		return HttpResponse(devolucion)#devuelve las listas de las carpetas
+	return HttpResponse('notFound')
 
 
 

@@ -2,9 +2,12 @@ from Usuarios import ListaSimple
 from ArbolB import Arbol
 from Pagina import Nodo,Pagina
 from Probando import probando
+
 a = Arbol()
 p = probando()
+n = Arbol()
 class Prueba ():
+
 
 	'''
 	cd documents\edd\laboratorio\proyecto2\entorno\server1
@@ -25,6 +28,28 @@ class Prueba ():
 		inn = ListaSimple( )
 		inn.insertar(inn.nuevoNodo('holi','pass123'))
 		print 'hola'
+
+
+	def FindFolder(offset,a):
+		print '\n\n=================se va a a findfolder'
+		carpetas=offset.split("/")
+		kk = n.nuevo("raiz")
+		kk._carpetas = a
+		busqueda = kk
+		for x in xrange(len(carpetas)):
+			devuelve = n.NodoBus(n.nuevo(str(carpetas[x])),busqueda._carpetas._principal)
+			busqueda = devuelve
+		if(devuelve != None):
+			#s.ActualFolder = devuelve
+			print 'Se ha encontrado'
+			print devuelve.Id
+			a = devuelve._carpetas
+			a.InsertarNuevo(a.nuevo("26"))
+			a.Imprime(a._principal)
+		else:
+			print 'un error de shit'
+			#devolucion = definirCarpetas()
+			#dprint devolucion
 
 	def eliminar():
 		print 'que dato desea eliminar?'
@@ -89,11 +114,13 @@ class Prueba ():
 		a.InsertarNuevo(a.nuevo("36"))
 		a.InsertarNuevo(a.nuevo("07"))
 		#a.Imprime(a._principal)
-		a.InsertarNuevo(a.nuevo("26"))
 
-		a.InsertarNuevo(a.nuevo("18"))
-		a.InsertarNuevo(a.nuevo("22"))
-		a.InsertarNuevo(a.nuevo("05"))
+		FindFolder("15",a)
+		#a.InsertarNuevo(a.nuevo("26"))
+
+		#a.InsertarNuevo(a.nuevo("18"))
+		#a.InsertarNuevo(a.nuevo("22"))
+		'''a.InsertarNuevo(a.nuevo("05"))
 		a.InsertarNuevo(a.nuevo("42"))
 		a.InsertarNuevo(a.nuevo("13"))
 		a.InsertarNuevo(a.nuevo("46"))
@@ -103,13 +130,13 @@ class Prueba ():
 		a.InsertarNuevo(a.nuevo("38"))
 		a.InsertarNuevo(a.nuevo("24"))
 		a.InsertarNuevo(a.nuevo("45"))
-		a.InsertarNuevo(a.nuevo("25"))
+		a.InsertarNuevo(a.nuevo("25"))'''
 
 
 
 		print '\n \n'
 		print '####impresion####'
-		a.Imprime(a._principal)
+		#a.Imprime(a._principal)
 
 
 		'''print '\n =================buscar============'
@@ -145,8 +172,8 @@ class Prueba ():
 		a.InsertarNuevo(a.nuevo("j1"))
 		a.InsertarNuevo(a.nuevo("j2"))
 		a.InsertarNuevo(a.nuevo("j3"))
-		a.InsertarNuevo(a.nuevo("j4"))
-		a.InsertarNuevo(a.nuevo("j5"))'''
+		a.InsertarNuevo(a.nuevo("j4"))'''
+		a.InsertarNuevo(a.nuevo("j5"))
 		print '==================finally========================='
 		print '=================================================='
 		#a.Imprime(a._principal)
@@ -162,6 +189,10 @@ class Prueba ():
 
 
 
+
+
+
+		
 
 
 		#a.Imprime'''
